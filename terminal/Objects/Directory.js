@@ -69,58 +69,63 @@ function getDirectoryFromDirectoryByName(directory, directoryname) {
 				return directory.directories[x];
 			}
 		}
-		return false;
 	}
 	return false;
 }
 
 function getDirectoryFromPath(Path) {
-	if (Path.charAt(0) != "/") {
-		Path = CurrentDir + Path; //currentDir ma w sobie na początku /root/? Zakładam że tak
-	}
-	var folders = new Array();
-	Path = Path.replace(" ", "");
-	var x = 1;
-	var str = "";
-	while (x <= Path.length) {
-		if (Path.charAt(x) == "/" || Path.charAt(x) == "" || Path.charAt(x) == " ") {
-			if (str != "" && str != " ") {
-				folders.push(str);
-
+	if(Path.charAt(0) == "/") {
+		var folders = new Array();
+		Path = Path.replace(" ", "");
+		var x = 1;
+		var str = "";
+		while(x <= Path.length) {
+			if(Path.charAt(x) == "/" || Path.charAt(x) == "" || Path.charAt(x) == " ") {
+				if(str != "" && str != " ") {
+					folders.push(str);
+					
+				}
+				x += 1;
+				str = "";
 			}
-			x += 1;
-			str = "";
+			str += Path.charAt(x);
+			x++;
+			
 		}
-		str += Path.charAt(x);
-		x++;
-
-	}
-
-	if (folders.length == 0) {
-		return root;
-	}
-	var b = 0;
-	var folder = "";
-	if (directoryInDirectoryExists(root, folders[b])) {
-		folder = getDirectoryFromDirectoryByName(root, folders[b]);
-		b++;
-		while (b < folders.length) {
-			if (directoryInDirectoryExists(folder, folders[b])) {
-				folder = getDirectoryFromDirectoryByName(folder, folders[b]);
-			} else {
-				newLine("cd: '" + Path + "': No such file or directory");
-				return false;
-			}
+		
+		if(folders.length == 0) {
+			return discDir;
+		}
+		var b = 0;
+		var folder = "";
+		if(directoryInDirectoryExists(discDir, folders[b])) {
+			folder = getDirectoryFromDirectoryByName(discDir, folders[b]);
 			b++;
+			while(b < folders.length ) {
+				if(folders[b] == "..") {
+					folder = folder.parent;
+				}				
+				else if(directoryInDirectoryExists(folder, folders[b])) {
+					folder = getDirectoryFromDirectoryByName(folder, folders[b]);
+				}
+				else {
+					newLine("cd: '" + Path + "': No such file or directory");
+					return false;
+				}
+				b++;
+			}
 		}
-	} else {
-		newLine("cd: '" + Path + "': No such file or directory");
-		return false;
-	}
-	if (folder != "") {
-		return folder;
+		else {
+			newLine("cd: '" + Path + "': No such file or directory");
+			return false;
+		}
+		if(folder != "") {
+			return folder;
+		}
+		
 	}
 }
+
 
 function getDirPath(Dir) {
 	if(Dir.type == "DIRECTORY") {

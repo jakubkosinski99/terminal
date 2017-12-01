@@ -41,6 +41,7 @@ $.getScript("terminal/Events/keyboardNanoEvents.js");
 $.getScript("terminal/Commands/ls.js");
 $.getScript("terminal/Commands/echo.js");
 $.getScript("terminal/Commands/mkdir.js");
+$.getScript("terminal/Commands/cd.js");
 
 
 var terminalStart = function() {
