@@ -1,3 +1,5 @@
+var defaultExtension = ".txt";
+
 function file(Name, Parent) {
 	this.name = Name;
 	this.hidden = false;
@@ -9,6 +11,7 @@ function file(Name, Parent) {
 		this.hidden = true;
 	}
 	this.ext = this.name.substring(this.name.indexOf(".", 1));
+	/*if(this.ext == ".") {}*/
 	this.inside = new array();
 	this.type = "FILE";
 	this.parent = Parent;

@@ -9,7 +9,12 @@ var mkdir = function() {
 		
 	}
 	if(checkPermission(currentUser, "w", currentDir)) {
-		new Directory(folderName, currentDir);
+		if(directoryInDirectoryExists(currentDir, folderName)) {
+			new Directory(folderName, currentDir);
+		}
+		else {
+			
+		}
 	}
 	newLine();
 }

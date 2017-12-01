@@ -8,7 +8,6 @@ function cd() {
 			if(currentDir.parent != undefined) {
 				currentDir = currentDir.parent;
 				newLine();
-				
 				return;
 			}
 			else {

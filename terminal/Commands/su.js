@@ -18,10 +18,10 @@ var suNext = function(login){
       user = getUserByName(login);
   if(user.password == psswd){
     currentUser = user;
-    newLine();
     nextCommand = "";
     nextCommandVar = "";
     psswdInput = false;
+	  newLine();
   }else{
     newLine("Password: ", null, "black");
   }
