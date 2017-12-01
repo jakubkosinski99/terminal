@@ -3,7 +3,7 @@ var keys = [];
 	/*Cursor move*/
 
 setInterval(function() {
-	if(inNano == false && inLoginPassword == false) {
+	if(inNano == false && psswdInput == false) {
 		$(".current").css("left", $("#prefix-" + currentLine).width() + currentChar*8);
 	}
 }, 1000/120)
@@ -18,9 +18,15 @@ $(window).bind("keypress", function(e) {
 			removeFromCurrentPos(s);
 		}
 		if(e.keyCode == 13) {
-			sendCommand();
-			terminalInside.scrollTop = terminalInside.scrollHeight;
-			return false;
+			if(nextCommand == ""){
+				sendCommand();
+				terminalInside.scrollTop = terminalInside.scrollHeight;
+				return false;
+			}else{
+				window[nextCommand](nextCommandVar);
+				terminalInside.scrollTop = terminalInside.scrollHeight;
+				return false;
+			}
 		}
 		insertIntoCurrentPos(consoleCode.innerHTML, String.fromCharCode(e.charCode));
 		currentString = consoleCode.innerHTML;

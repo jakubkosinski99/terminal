@@ -6,7 +6,7 @@ var currentChar = 0,
 	prefix = "/ ",
 	currentUser,
 	inNano = false,
-	inLoginPassword = false,
+	inLoginPassword = false, //coś ta zmienna sypie terminal, widocznie gdzieś jej nadużyłeś
 	currentNanoLine,
 	currentNanoChar,
 	currentNanoLines,
@@ -15,7 +15,10 @@ var currentChar = 0,
 	startDir,
 	DEFAULT_PER = "744",
 	currentDir,
-	currentUserHomeDir;
+	currentUserHomeDir,
+	nextCommand = "",
+	nextCommandVar = "",
+	psswdInput = false;
 
 var rootGroup = new Group("root"),
 	usersGroup = new Group("Users"),
@@ -27,7 +30,7 @@ var rootGroup = new Group("root"),
 
 	discDir.ownerUsr = rootUser,
 	discDir.ownerGrp = rootGroup;
-	
+
 	var defaultUser = new User("Guest", "");
 	currentUser = defaultUser;
 	currentUserHomeDir = currentUser.homeDir;
@@ -42,6 +45,7 @@ $.getScript("terminal/Commands/ls.js");
 $.getScript("terminal/Commands/echo.js");
 $.getScript("terminal/Commands/mkdir.js");
 $.getScript("terminal/Commands/cd.js");
+$.getScript("terminal/Commands/su.js");
 
 
 var terminalStart = function() {
@@ -66,15 +70,18 @@ function newLine(pr, color) {
 		pref.style.color = color;
 	}
 	var code = document.createElement("span");
+	if(psswdInput){
+		code.style.color = "black";
+	}
 	code.setAttribute("id", "code-" + currentLine);
 	line.appendChild(pref);
 	line.appendChild(code);
-	
+
 	$(".current").remove();
-	
+
 	var cursor = document.createElement("div");
 	cursor.setAttribute("class", "current");
-	line.appendChild(cursor);
+	if(!psswdInput){line.appendChild(cursor);}
 	terminalInside.appendChild(line);
 	consoleCode = document.getElementById("code-" + currentLine);
 	currentString = consoleCode.innerHTML;
@@ -89,9 +96,9 @@ function sendCommand() {
 		if(currentString.charAt(x) == "") {break;}
 		command += currentString.charAt(x);
 		x++;
-		
+
 	}
-	
+
 	if (typeof window[command] == "function") {
 		var cmd = window[command];
 		cmd();
@@ -106,4 +113,3 @@ function sendCommand() {
 		}
 	}
 }
-

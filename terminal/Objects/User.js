@@ -42,7 +42,7 @@ function deleteUser(Name) {
 function userExists(Name) {
 	var exists = false;
 	for (var x = 0; x < users.length; x++) {
-		if(users[x] == Name) {
+		if(users[x].name == Name) {
 			exists = true;
 		}
 	}
@@ -53,11 +53,11 @@ function userExists(Name) {
 function getUserByName(Name) {
 	var user = false;
 	for (var x = 0; x < users.length; x++) {
-		if(users[x] == Name) {
+		if(users[x].name == Name) {
 			user = users[x];
 		}
 	}
-	
+
 	if(user != false) return user;
 	if(!user) return false;
 }
@@ -82,7 +82,7 @@ function checkPermission(Us, What, FF) {
 					}
 					if(chain.charAt(2) == 4 || chain.charAt(2) == 6 || chain.charAt(2) == 7 || chain.charAt(0) == 5) return true;
 					return false;
-					
+
 				case "w":
 					if(FF.ownerUsr == Us) {
 						if(chain.charAt(0) == 2 || chain.charAt(0) == 3 || chain.charAt(0) == 6 || chain.charAt(0) == 7) return true;
@@ -103,7 +103,7 @@ function checkPermission(Us, What, FF) {
 							if(chain.charAt(1) == 1 || chain.charAt(1) == 3 || chain.charAt(1) == 5 || chain.charAt(1) == 7) return true;
 						}
 					}
-					if(chain.charAt(2) == 1 || chain.charAt(2) == 3 || chain.charAt(2) == 5 || chain.charAt(2) == 7) return true;		
+					if(chain.charAt(2) == 1 || chain.charAt(2) == 3 || chain.charAt(2) == 5 || chain.charAt(2) == 7) return true;
 					return false;
 			}
 		}
@@ -121,7 +121,7 @@ function checkPermission(Us, What, FF) {
 					}
 					if(chain.charAt(2) == 4 || chain.charAt(2) == 6 || chain.charAt(2) == 7 || chain.charAt(0) == 5) return true;
 					return false;
-					
+
 				case "w":
 					if(FF.ownerUsr == Us) {
 						if(chain.charAt(0) == 2 || chain.charAt(0) == 3 || chain.charAt(0) == 6 || chain.charAt(0) == 7) return true;
@@ -142,19 +142,10 @@ function checkPermission(Us, What, FF) {
 							if(chain.charAt(1) == 1 || chain.charAt(1) == 3 || chain.charAt(1) == 5 || chain.charAt(1) == 7) return true;
 						}
 					}
-					if(chain.charAt(2) == 1 || chain.charAt(2) == 3 || chain.charAt(2) == 5 || chain.charAt(2) == 7) return true;	
+					if(chain.charAt(2) == 1 || chain.charAt(2) == 3 || chain.charAt(2) == 5 || chain.charAt(2) == 7) return true;
 					return false;
 			}
 		}
 	}
 	return false;
 }
-
-
-
-
-
-
-
-
-
