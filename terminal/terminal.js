@@ -1,3 +1,7 @@
+console.log("%cSTOP", "color: red; font-size: 30px");
+console.log("%cDont use this console for better your experience", "color: red; font-size: 25px");
+
+
 var currentChar = 0,
 	terminalInside = document.getElementById("inside"),
 	consoleCode,
@@ -46,6 +50,9 @@ $.getScript("terminal/Commands/echo.js");
 $.getScript("terminal/Commands/mkdir.js");
 $.getScript("terminal/Commands/cd.js");
 $.getScript("terminal/Commands/su.js");
+$.getScript("terminal/Commands/pwd.js");
+$.getScript("terminal/Commands/whoami.js");
+$.getScript("terminal/Commands/groups.js");
 
 
 var terminalStart = function() {
@@ -113,3 +120,12 @@ function sendCommand() {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
