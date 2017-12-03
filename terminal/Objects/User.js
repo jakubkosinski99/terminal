@@ -67,7 +67,7 @@ function getUserByName(Name) {
 
 
 function checkPermission(Us, What, FF) {
-	if(userExists(Us)) {
+	if(userExists(Us.name)) {
 		if(FF.type == "DIRECTORY") {
 			var chain = FF.permissions;
 			console.log(chain);
