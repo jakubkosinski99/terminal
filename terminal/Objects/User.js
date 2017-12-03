@@ -16,6 +16,7 @@ function User(Name, Password, Group) {
 			this.bypass = true;
 			this.groups = new Array();
 			this.groups.push(getGroupByName("root"));
+			this.homeDir = discDir;
 		}
 		else {
 			this.homeDir = new Directory(Name, homeDir);

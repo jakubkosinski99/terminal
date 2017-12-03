@@ -1,32 +1,52 @@
 var defaultExtension = ".txt";
 
-function file(Name, Parent) {
-	this.name = Name;
-	this.hidden = false;
-	this.ownerUsr = currentUsr;
-	this.ownerGrp = currentUsr.groupName; //grupa użytkownika właściciela
-	this.defaultPer = DEFAULT_PER;
-	this.permissions = DEFAULT_PER;
-	if (this.name.indexOf(".") == 0) {
-		this.hidden = true;
+function File(Name, Parent, Extension) {
+	var y = defaultExtension;
+	if(Extension != undefined) {
+		y = Extension;
 	}
-	this.ext = this.name.substring(this.name.indexOf(".", 1));
-	/*if(this.ext == ".") {}*/
-	this.inside = new array();
-	this.type = "FILE";
-	this.parent = Parent;
-	this.parent.files.push(this);
+	if(!fileExists(Name, y, Parent)) {
+		this.name = Name;
+		this.hidden = false;
+		this.ownerUsr = currentUser;
+		this.ownerGrp;
+		this.defaultPer = DEFAULT_PER;
+		this.permissions = DEFAULT_PER;
+		if (Extension != undefined) {
+			this.extension = Extension;
+		} else {
+			this.extension = defaultExtension;
+		}
+		this.visibility = true;
+		if (this.name.charAt(0) == ".") {
+			this.visibility = false;
+		}
+		this.inside = new Array();
+		this.type = "FILE";
+		this.parent = Parent;
+		this.parent.files.push(this);
+	}
+	else {
+		newLine("touch: cannot create file '" + Name + "': File exists");
+	}
 }
 
-function fileExists(Name) {
+function fileExists(Name, Extension, Parent) {
 	var x = 0;
-	while (x < currentDir.directories.lenght) {
-		if (currentDir.directories[x].name == Name) {
-			return true;
+	
+	if(Parent.type == "DIRECTORY") {
+		while (x < Parent.files.length) {
+			console.log(Parent.files[x])
+			if (Parent.files[x].name == Name && Parent.files[x].extension == Extension) {
+				return true;
+			}
+			x++;
 		}
-		x++;
 	}
-	return false;
+	else {
+		console.log("XD");
+		return false;
+	}
 }
 
 function getFileFromName(Name) {
@@ -110,3 +130,16 @@ function getFileFromPath(Path) {
 	}
 
 }
+
+function getFile(Name, Extension, Parent) {
+	if(Parent.type == "DIRECTORY") {
+		for(var x = 0; x < Parent.files.length; x++) {
+			if(Parent.files[x].name == Name && Parent.files[x].extension == Extension) {
+				return Parent.files[x];
+			}
+		}
+	}
+	return false;
+}
+
+

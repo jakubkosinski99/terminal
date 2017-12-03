@@ -97,6 +97,7 @@ function cd() {
 		}
 	}
 	else {
+		currentDir = currentUser.homeDir;
 		newLine();
 	}
 	

@@ -24,11 +24,12 @@ var currentChar = 0,
 	nextCommandVar = "",
 	psswdInput = false;
 
-var rootGroup = new Group("root"),
+var discDir = new Directory(""), 
+	rootGroup = new Group("root"),
 	usersGroup = new Group("Users"),
 	rootUser = new User("root", "root"),
 	currentUser = rootUser,
-	discDir = new Directory(""),
+	
 	homeDir = new Directory("home", discDir, false),
 	startDir = discDir;
 
@@ -53,6 +54,9 @@ $.getScript("terminal/Commands/su.js");
 $.getScript("terminal/Commands/pwd.js");
 $.getScript("terminal/Commands/whoami.js");
 $.getScript("terminal/Commands/groups.js");
+$.getScript("terminal/Commands/touch.js");
+$.getScript("terminal/Commands/nano.js");
+$.getScript("terminal/Commands/clear.js");
 
 
 var terminalStart = function() {

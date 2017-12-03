@@ -6,7 +6,7 @@ setInterval(function() {
 	if(inNano == true && inLoginPassword == false) {
 		$(".current").css("left", currentNanoChar*8);
 	}
-}, 1000/120)
+}, 1000/500)
 
 	/*Keys events*/
 

@@ -6,7 +6,7 @@ setInterval(function() {
 	if(inNano == false && psswdInput == false) {
 		$(".current").css("left", $("#prefix-" + currentLine).width() + currentChar*8);
 	}
-}, 1000/120)
+}, 1000/240)
 
 	/*Keys events*/
 
