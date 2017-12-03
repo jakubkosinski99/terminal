@@ -47,6 +47,11 @@ body {
 #info-section > ol > li {
 	margin-top: 10px;
 }
+
+.git {
+	height: 100px;
+	margin-top: 20px;
+}
 .line {
 	position: relative;
 	min-height: 17px;
