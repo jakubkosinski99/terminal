@@ -28,6 +28,7 @@ $(window).bind("keypress", function(e) {
 				return false;
 			}
 		}
+		e.preventDefault();
 		insertIntoCurrentPos(consoleCode.innerHTML, String.fromCharCode(e.charCode));
 		currentString = consoleCode.innerHTML;
 		currentChar += 1;

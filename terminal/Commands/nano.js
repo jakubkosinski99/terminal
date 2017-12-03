@@ -9,50 +9,53 @@ function nano() {
 		name += cmd.charAt(0);
 		while(cmd.charAt(x) != ".") {
 			if(cmd.charAt(x) == " " || cmd.charAt(x) == "") {
-				extension = "undefined";
-				name = "undefined";
 				break;
 			}
 			name += cmd.charAt(x);
 			x++;
 		}
 		
-		if(name != "undefined") {
-			extension = cmd.slice(name.length, cmd.length);
-			extension.replace(" ", "");
-		}
+		extension = cmd.slice(name.length, cmd.length);
+		extension.replace(" ", "");
 		if(getFile(name, extension, currentDir) != false) {
-			var nanoFile = getFile(name, extension, currentDir);
-			currentNanoFile = getFile(name, extension, currentDir);
-			newLine();
-			inNano = true;
-			terminalInside.innerHTML = "";
-			var nanoInside = "";
-			currentNanoLines = 0;
-			currentNanoChar = 0;
-			currentNanoLine = 0;
-			for(var x = 0; x < nanoFile.inside.length; x++) {
-				terminalInside.appendChild(nanoFile.inside[x]);
-				currentNanoLines++;
-			}
-			if(currentNanoLines == 0) {
-				newNanoLine();
-				setTimeout(function() {
+			if(checkPermission(currentUser, "w", getFile(name, extension, currentDir))) {
+				var nanoFile = getFile(name, extension, currentDir);
+				currentNanoFile = getFile(name, extension, currentDir);
+				newLine();
+				inNano = true;
+				terminalInside.innerHTML = "";
+				var nanoInside = "";
+				currentNanoLines = 0;
+				currentNanoChar = 0;
+				currentNanoLine = 0;
+				for(var x = 0; x < nanoFile.inside.length; x++) {
+					terminalInside.appendChild(nanoFile.inside[x]);
+					currentNanoLines++;
+				}
+				if(currentNanoLines == 0) {
+					newNanoLine();
+					setTimeout(function() {
+						currentNanoLine = 1;
+						currentNanoLines = 1;
+						$("#line-2").remove();
+						repairCurrentNanoString();
+					}, 50)
+				}
+				else {
 					currentNanoLine = 1;
-					currentNanoLines = 1;
-					$("#line-2").remove();
 					repairCurrentNanoString();
-				}, 50)
+				}
+				setTimeout(function() {
+					complete = true;
+				})
 			}
 			else {
-				currentNanoLine = 1;
-				repairCurrentNanoString();
+				newLine("nano: No permissions to do this action");
+				newLine();
 			}
-			setTimeout(function() {
-				complete = true;
-			})
 		}
 		else {
+			newLine("nano: '" + name + extension + "': No such file or directory");
 			newLine();
 		}
 	} 

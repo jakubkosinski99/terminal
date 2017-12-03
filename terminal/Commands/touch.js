@@ -30,13 +30,18 @@ function touch() {
 		extension += full.charAt(x);
 		x++;	
 	}
-	
-	if(extension != "" && extension != " ") {
-		new File(name, currentDir, extension);
-		newLine();
-	} 
+	if(checkPermission(currentUser, "w", currentDir)) {
+		if(extension != "" && extension != " ") {
+				new File(name, currentDir, extension);
+				newLine();
+		}
+		else {
+			new File(name, currentDir);
+			newLine();
+		}
+	}
 	else {
-		new File(name, currentDir);
+		newLine("mkdir: No permissions to do this action");
 		newLine();
 	}
 }

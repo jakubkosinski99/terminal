@@ -12,6 +12,12 @@ var mkdir = function() {
 		if(!directoryInDirectoryExists(currentDir, folderName)) {
 			new Directory(folderName, currentDir);
 		}
+		else {
+			newLine("mkdir: '" + folderName + "': Folder already exists");
+		}
+	}
+	else {
+		newLine("mkdir: No permissions to do this action");
 	}
 	newLine();
 }

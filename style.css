@@ -2,21 +2,51 @@
 html, body {
 	height: 100%;
 	width: 100%;
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 * {
 	font-family: 'Inconsolata', monospace;
 	font-size: 16px;
 	box-sizing: border-box;
+	margin: 0;
 }
 body {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	background-color: #ebebeb;
 }
 
+#terminal-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+#info-section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #080808;
+	padding: 100px;
+	color: #fff;
+	flex-direction: column;
+}
+
+#info-section > ol {
+	margin-top: 20px;
+	text-align: center;
+	list-style-type: none;
+}
+
+#info-section > ol > li:nth-child(1) {
+	font-size: 20px;
+	font-weight: 700;
+	margin-bottom: 30px;
+}
+#info-section > ol > li {
+	margin-top: 10px;
+}
 .line {
 	position: relative;
 	min-height: 17px;
